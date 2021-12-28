@@ -89,3 +89,24 @@ var server = http.createServer(function(request, response){
 
 server.listen(port)
 console.log('监听 ' + port + ' 成功\n请用在空中转体720度然后用电饭煲打开 http://localhost:' + port)
+
+ajax = (method, url, options)=>{
+    return new Promise((resolve, reject)=>{
+        const {success, fail} = options
+        const request = new XMLHttpRequest()
+        request.open(method, url)
+        request.onreadystatechange = ()=>{
+            if(request.readyState === 4){
+// resolve reject
+                if(request.status < 400){
+                    resolve.call(null, request.response)
+                }else if(request.status >= 400){
+                    reject.call(null, request)
+                }
+            }
+        }
+        request.send()
+    })
+}
+ajax('get', '/xxx')
+    .then((response)=>{}, (request, status)=>{})

@@ -34,7 +34,6 @@ nextPage.onclick = () => {
         n -= 1
         return
     }
-
     request.send()
 }
 getJSON.onclick = () => {
